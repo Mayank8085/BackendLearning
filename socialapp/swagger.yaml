@@ -1,0 +1,85 @@
+openapi : 3.0.0
+info :
+  title : SocialApp
+  version : 1.0.1
+  description : SocialApp for Mayank Sahu
+
+servers :
+  - url : http://localhost:5000/api/v1
+    description : Development server
+
+  - url : https://mayanksocialapp.herokuapp.com/api/v1
+    description : Production server
+
+components :
+  securitySchemes :
+    bearerAuth :
+      type : http
+      scheme : bearer
+      bearerFormat : JWT
+    
+    basicAuth :
+      type : http
+      scheme : basic
+      in : header
+      name : Authorization
+
+paths : 
+  /instagram : 
+    get :
+      summary : returns username , followers and following
+      responses :
+        200 :
+          description : OK
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  username :
+                    type : string
+                  followers :
+                    type : integer
+                  following :
+                    type : integer
+                    
+    post :
+      summary : returns username , followers and following
+      responses :
+        200 :
+          description : OK
+          content :
+            application/json :
+              schema :
+                type : object
+                properties :
+                  username :
+                    type : string
+                  followers :
+                    type : integer
+                  following :
+                    type : integer
+        
+  /{token}:
+    get :
+      summary : returns whatever in the parameter
+      parameters :
+        - name : token
+          in : path
+          required : true
+     
+          description : "token"
+          default : 4
+          schema :
+            type : string
+      responses :
+        200 :
+          description : OK
+          content :
+            application/json :
+              schema :
+                type : string
+                properties :
+                  token :
+                    type : string
+
